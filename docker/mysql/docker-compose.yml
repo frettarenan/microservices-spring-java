@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  rf-mysql-modulo-cadastros-essenciais:
+    image: mysql:5.7
+    container_name: rf-mysql-modulo-cadastros-essenciais
+    environment:
+      MYSQL_DATABASE: rf-modulo-cadastros-essenciais
+      MYSQL_USER: renanfretta
+      MYSQL_PASSWORD: 'Ren@nFretta1986'
+      MYSQL_ROOT_PASSWORD: 'Ren@nFretta1986'
+    ports:
+    - 3306:3306
+  rf-mysql-modulo-clientes:
+    image: mysql:5.7
+    container_name: rf-mysql-modulo-clientes
+    environment:
+      MYSQL_DATABASE: rf-modulo-clientes
+      MYSQL_USER: renanfretta
+      MYSQL_PASSWORD: 'Ren@nFretta1986'
+      MYSQL_ROOT_PASSWORD: 'Ren@nFretta1986'
+    ports:
+    - 3307:3306
