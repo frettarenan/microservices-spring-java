@@ -6,200 +6,326 @@
 	},
 	"item": [
 		{
-			"name": "Estado",
+			"name": "Módulo Cadastros Essenciais",
 			"item": [
 				{
-					"name": "findAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/estados",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"estados"
-							]
+					"name": "Estado",
+					"item": [
+						{
+							"name": "findAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/estados",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"estados"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/estados/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"estados",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findByNomeContains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/estados/nome/santa",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"estados",
+										"nome",
+										"santa"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "findById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/estados/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"estados",
-								"1"
-							]
+					"name": "Cidade",
+					"item": [
+						{
+							"name": "findAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/cidades",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/cidades/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findByNomeContains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/cidades/nome/floriano",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades",
+										"nome",
+										"floriano"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findByEstado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/cidades/uf/sc",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades",
+										"uf",
+										"sc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nome\": \"Pescaria Brava\",\n    \"estado\": {\n        \"id\" : 24\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/cidades",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 5565,\n    \"nome\": \"Pescaria Brava Alterado\",\n    \"estado\": {\n        \"id\": 24\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/cidades",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cidades"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "findByNomeContains",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/estados/nome/santa",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"estados",
-								"nome",
-								"santa"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
 		{
-			"name": "Cidade",
+			"name": "Módulo Clientes",
 			"item": [
 				{
-					"name": "findAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/cidades",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "findById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/cidades/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "findByNomeContains",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/cidades/nome/floriano",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades",
-								"nome",
-								"floriano"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "findByEstado",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/cidades/uf/sc",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades",
-								"uf",
-								"sc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "salvar",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"Pescaria Brava\",\n    \"estado\": {\n        \"id\" : 24\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Cliente",
+					"item": [
+						{
+							"name": "findAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/clientes",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:8080/cidades",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atualizar",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": 5565,\n    \"nome\": \"Pescaria Brava Alterado\",\n    \"estado\": {\n        \"id\": 24\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/clientes/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"1"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:8080/cidades",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"cidades"
-							]
+						{
+							"name": "findByNomeContains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/clientes/nome/renan",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"nome",
+										"renan"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nome\": \"Betty Faria\",\n    \"sexo\": \"F\",\n    \"dataNascimento\": \"1941-05-08\",\n    \"idCidade\" : 3658\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/clientes",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 3,\n\t\"nome\": \"Mario Farias\",\n    \"sexo\": \"M\",\n    \"dataNascimento\": \"1950-08-10\",\n    \"idCidade\" : 5560\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/clientes",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}

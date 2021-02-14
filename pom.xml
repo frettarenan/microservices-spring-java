@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>cadastros-essenciais-microservice</module>
+		<module>clientes-microservice</module>
 	</modules>
 
 	<properties>
