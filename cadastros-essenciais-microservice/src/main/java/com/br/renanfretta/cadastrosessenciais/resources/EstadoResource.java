@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.renanfretta.cadastrosessenciais.dtos.EstadoDTO;
 import com.br.renanfretta.cadastrosessenciais.services.EstadoService;
+import com.br.renanfretta.commons.dtos.cadastrosessenciais.EstadoDTO;
 
 @RestController
 @RequestMapping(value = "/estados")

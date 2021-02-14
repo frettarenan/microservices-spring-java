@@ -2,10 +2,10 @@ package com.br.renanfretta.cadastrosessenciais.configs;
 
 import org.springframework.stereotype.Component;
 
-import com.br.renanfretta.cadastrosessenciais.dtos.CidadeDTO;
-import com.br.renanfretta.cadastrosessenciais.dtos.EstadoDTO;
 import com.br.renanfretta.cadastrosessenciais.entities.Cidade;
 import com.br.renanfretta.cadastrosessenciais.entities.Estado;
+import com.br.renanfretta.commons.dtos.cadastrosessenciais.CidadeDTO;
+import com.br.renanfretta.commons.dtos.cadastrosessenciais.EstadoDTO;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

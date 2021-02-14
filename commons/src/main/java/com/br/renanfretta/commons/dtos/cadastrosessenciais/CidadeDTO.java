@@ -1,21 +1,15 @@
-package com.br.renanfretta.cadastrosessenciais.dtos;
+package com.br.renanfretta.commons.dtos.cadastrosessenciais;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CidadeDTO implements Serializable {
-	
-	private static final long serialVersionUID = 6911892286218945093L;
+
+	private static final long serialVersionUID = 7568049974376820896L;
 
 	@EqualsAndHashCode.Include
 	private Long id;

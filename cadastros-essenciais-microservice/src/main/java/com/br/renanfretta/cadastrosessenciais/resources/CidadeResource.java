@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.renanfretta.cadastrosessenciais.dtos.CidadeDTO;
 import com.br.renanfretta.cadastrosessenciais.services.CidadeService;
+import com.br.renanfretta.commons.dtos.cadastrosessenciais.CidadeDTO;
 
 @RestController
 @RequestMapping(value = "/cidades")

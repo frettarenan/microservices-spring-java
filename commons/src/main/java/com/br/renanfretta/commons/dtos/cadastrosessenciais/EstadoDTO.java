@@ -1,27 +1,21 @@
-package com.br.renanfretta.cadastrosessenciais.dtos;
+package com.br.renanfretta.commons.dtos.cadastrosessenciais;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EstadoDTO implements Serializable {
-
-	private static final long serialVersionUID = 3126105858133235518L;
-
+	
+	private static final long serialVersionUID = 6830324586282104433L;
+	
 	@EqualsAndHashCode.Include
 	private Long id;
 
 	private String nome;
-
+	
 	private String uf;
 
 }

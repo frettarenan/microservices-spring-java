@@ -1,10 +1,10 @@
-package com.br.renanfretta.cadastrosessenciais;
+package com.br.renanfretta.clientes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CadastrosEssenciaisMicroserviceApplicationTests {
+class ClientesMicroserviceApplicationTests {
 
 	@Test
 	void contextLoads() {

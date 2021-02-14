@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.br.renanfretta.cadastrosessenciais.configs.OrikaMapper;
-import com.br.renanfretta.cadastrosessenciais.dtos.CidadeDTO;
 import com.br.renanfretta.cadastrosessenciais.entities.Cidade;
 import com.br.renanfretta.cadastrosessenciais.repositories.CidadeRepository;
+import com.br.renanfretta.commons.dtos.cadastrosessenciais.CidadeDTO;
 
 @Service
 @Validated
