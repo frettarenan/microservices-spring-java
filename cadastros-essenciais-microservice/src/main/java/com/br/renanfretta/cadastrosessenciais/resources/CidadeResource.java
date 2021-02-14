@@ -15,49 +15,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.renanfretta.cadastrosessenciais.entities.Cidade;
-import com.br.renanfretta.cadastrosessenciais.repositories.CidadeRepository;
+import com.br.renanfretta.cadastrosessenciais.dtos.CidadeDTO;
+import com.br.renanfretta.cadastrosessenciais.services.CidadeService;
 
 @RestController
 @RequestMapping(value = "/cidades")
 public class CidadeResource {
 
 	@Autowired
-	private CidadeRepository repository;
+	private CidadeService service;
 
 	@GetMapping
-	public ResponseEntity<List<Cidade>> findAll() {
-		List<Cidade> list = repository.findAll();
+	public ResponseEntity<List<CidadeDTO>> findAll() {
+		List<CidadeDTO> list = service.findAll();
 		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cidade> findById(@PathVariable Long id) {
-		Cidade cidade = repository.findById(id).orElseThrow();
-		return ResponseEntity.ok(cidade);
+	public ResponseEntity<CidadeDTO> findById(@PathVariable Long id) {
+		CidadeDTO cidadeDTO = service.findById(id);
+		return ResponseEntity.ok(cidadeDTO);
 	}
 
 	@PostMapping
-	public ResponseEntity<Cidade> salvar(@Valid @RequestBody Cidade cidade) {
-		cidade = repository.save(cidade);
-		return ResponseEntity.status(HttpStatus.CREATED).body(cidade);
+	public ResponseEntity<CidadeDTO> salvar(@Valid @RequestBody CidadeDTO cidadeDTO) {
+		cidadeDTO = service.save(cidadeDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(cidadeDTO);
 	}
 
 	@PutMapping
-	public ResponseEntity<Cidade> atualizar(@Valid @RequestBody Cidade cidade) {
-		cidade = repository.save(cidade);
-		return ResponseEntity.status(HttpStatus.OK).body(cidade);
+	public ResponseEntity<CidadeDTO> atualizar(@Valid @RequestBody CidadeDTO cidadeDTO) {
+		cidadeDTO = service.save(cidadeDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(cidadeDTO);
 	}
 
 	@GetMapping(value = "/nome/{nome}")
-	public ResponseEntity<List<Cidade>> findByNome(@PathVariable String nome) {
-		List<Cidade> list = repository.findByNomeContaining(nome);
+	public ResponseEntity<List<CidadeDTO>> findByNome(@PathVariable String nome) {
+		List<CidadeDTO> list = service.findByNomeContaining(nome);
 		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/uf/{uf}")
-	public ResponseEntity<List<Cidade>> findByEstado(@PathVariable String uf) {
-		List<Cidade> list = repository.findByUf(uf);
+	public ResponseEntity<List<CidadeDTO>> findByEstado(@PathVariable String uf) {
+		List<CidadeDTO> list = service.findByUf(uf);
 		return ResponseEntity.ok(list);
 	}
 
