@@ -10,6 +10,10 @@ Este projeto foi criado utilizando o sistema operacional Linux Ubuntu 20.10 e as
 * Docker compose
 * Banco de dados Mysql
 
+## Configuração do Postman
+
+* Importe o arquivo: "./postman/microservices-spring-java.postman_collection.json"
+
 ## Procedimento para ligar o servidor de banco de dados
 
 * No terminal do sistema operacional, entre no diretório "docker" e digite o comando: "./up-dev-mysql.sh".
