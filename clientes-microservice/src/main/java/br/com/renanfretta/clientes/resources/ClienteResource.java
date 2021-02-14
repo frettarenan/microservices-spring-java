@@ -61,5 +61,7 @@ public class ClienteResource {
 		ClienteDTO clienteDTO = service.deleteById(id);
 		return ResponseEntity.ok(clienteDTO);
 	}
+	
+	// FIXME: Implementar Alterar o nome do cliente
 
 }
