@@ -278,7 +278,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"nome\": \"Betty Faria\",\n    \"sexo\": \"F\",\n    \"dataNascimento\": \"1941-05-08\",\n    \"idCidade\" : 3658\n}",
+									"raw": "{\n\t\"nome\": \"Betty Faria\",\n    \"sexo\": \"F\",\n    \"dataNascimento\": \"1941-05-08\",\n    \"cidade\" : {\n        \"id\" : 3658\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -305,7 +305,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"id\": 3,\n\t\"nome\": \"Mario Farias\",\n    \"sexo\": \"M\",\n    \"dataNascimento\": \"1950-08-10\",\n    \"idCidade\" : 5560\n}",
+									"raw": "{\n    \"id\": 3,\n\t\"nome\": \"Mario Farias\",\n    \"sexo\": \"M\",\n    \"dataNascimento\": \"1950-08-10\",\n    \"cidade\" : {\n        \"id\" : 5560\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"

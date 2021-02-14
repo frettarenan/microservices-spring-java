@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,51 +16,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.renanfretta.clientes.entities.Cliente;
-import com.br.renanfretta.clientes.repositories.ClienteRepository;
+import com.br.renanfretta.clientes.services.ClienteService;
+import com.br.renanfretta.commons.dtos.clientes.ClienteDTO;
 
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
-	
-    /*  
-    Cadastrar cliente
-    Consultar cliente pelo nome
-    Consultar cliente pelo Id
-    Remover cliente
-    Alterar o nome do cliente */
 
 	@Autowired
-	private ClienteRepository repository;
-	
+	private ClienteService service;
+
 	@GetMapping
-	public ResponseEntity<List<Cliente>> findAll() {
-		List<Cliente> list = repository.findAll();
+	public ResponseEntity<List<ClienteDTO>> findAll() {
+		List<ClienteDTO> list = service.findAll();
 		return ResponseEntity.ok(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cliente> findById(@PathVariable Long id) {
-		Cliente cliente = repository.findById(id).orElseThrow();
-		return ResponseEntity.ok(cliente);
+	public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
+		ClienteDTO clienteDTO = service.findById(id);
+		return ResponseEntity.ok(clienteDTO);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente cliente) {
-		cliente = repository.save(cliente);
-		return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
+	public ResponseEntity<ClienteDTO> salvar(@Valid @RequestBody ClienteDTO clienteDTO) {
+		clienteDTO = service.save(clienteDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(clienteDTO);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Cliente> atualizar(@Valid @RequestBody Cliente cliente) {
-		cliente = repository.save(cliente);
-		return ResponseEntity.status(HttpStatus.OK).body(cliente);
+	public ResponseEntity<ClienteDTO> atualizar(@Valid @RequestBody ClienteDTO clienteDTO) {
+		clienteDTO = service.save(clienteDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(clienteDTO);
 	}
-	
+
 	@GetMapping(value = "/nome/{nome}")
-	public ResponseEntity<List<Cliente>> findByNome(@PathVariable String nome) {
-		List<Cliente> list = repository.findByNomeContaining(nome);
+	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
+		List<ClienteDTO> list = service.findByNomeContaining(nome);
 		return ResponseEntity.ok(list);
 	}
-	
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<ClienteDTO> deleteById(@PathVariable Long id) {
+		ClienteDTO clienteDTO = service.deleteById(id);
+		return ResponseEntity.ok(clienteDTO);
+	}
+
 }
