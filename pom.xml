@@ -32,7 +32,7 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.br.renanfretta.microservices-spring-java</groupId>
+				<groupId>br.com.renanfretta.microservices-spring-java</groupId>
 				<artifactId>commons</artifactId>
 				<version>${version}</version>
 			</dependency>

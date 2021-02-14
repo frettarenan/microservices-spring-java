@@ -12,12 +12,12 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.br.renanfretta.microservices-spring-java</groupId>
+	<groupId>br.com.renanfretta.microservices-spring-java</groupId>
 	<artifactId>clientes-microservice</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.br.renanfretta.microservices-spring-java</groupId>
+			<groupId>br.com.renanfretta.microservices-spring-java</groupId>
 			<artifactId>commons</artifactId>
 		</dependency>
 	
