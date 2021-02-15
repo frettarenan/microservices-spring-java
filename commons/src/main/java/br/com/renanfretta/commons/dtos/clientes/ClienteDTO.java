@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.renanfretta.commons.dtos.cadastrosessenciais.CidadeDTO;
 
 import lombok.Data;
@@ -22,6 +24,7 @@ public class ClienteDTO implements Serializable {
 
 	private String sexo;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dataNascimento;
 
 	private CidadeDTO cidade;

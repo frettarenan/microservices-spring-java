@@ -61,6 +61,12 @@
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+  			<artifactId>gson</artifactId>
+  			<scope>test</scope>
+  		</dependency>
 	</dependencies>
 
 	<build>
