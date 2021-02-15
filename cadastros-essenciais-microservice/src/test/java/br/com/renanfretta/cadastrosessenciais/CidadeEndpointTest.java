@@ -118,6 +118,14 @@ public class CidadeEndpointTest {
 			mockMvc.perform(get("/cidades/79")) //
 					.andExpect(status().isNotFound());
 		}
+		
+		@Test
+		@DisplayName("Erro: ID inválido")
+		public void findByIdErro() throws Exception {
+
+			mockMvc.perform(get("/cidades/AAAAA")) //
+					.andExpect(status().isBadRequest());
+		}
 
 	}
 

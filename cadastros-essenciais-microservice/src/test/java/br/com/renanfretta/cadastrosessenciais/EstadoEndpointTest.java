@@ -104,6 +104,14 @@ public class EstadoEndpointTest {
 			mockMvc.perform(get("/estados/1")) //
 					.andExpect(status().isNotFound());
 		}
+		
+		@Test
+		@DisplayName("Erro: ID inválido")
+		public void findByIdErro() throws Exception {
+
+			mockMvc.perform(get("/estados/AAAAA")) //
+					.andExpect(status().isBadRequest());
+		}
 
 	}
 	
