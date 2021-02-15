@@ -324,6 +324,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "editar informações preenchidas",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nome\": \"Renan Fretta Teste Edição do Nome\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/clientes/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
