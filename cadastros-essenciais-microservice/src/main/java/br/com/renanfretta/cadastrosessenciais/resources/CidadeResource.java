@@ -1,6 +1,7 @@
 package br.com.renanfretta.cadastrosessenciais.resources;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -28,13 +29,19 @@ public class CidadeResource {
 	@GetMapping
 	public ResponseEntity<List<CidadeDTO>> findAll() {
 		List<CidadeDTO> list = service.findAll();
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CidadeDTO> findById(@PathVariable Long id) {
-		CidadeDTO cidadeDTO = service.findById(id);
-		return ResponseEntity.ok(cidadeDTO);
+		try {
+			CidadeDTO cidadeDTO = service.findById(id);
+			return ResponseEntity.ok(cidadeDTO);
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PostMapping
@@ -52,12 +59,16 @@ public class CidadeResource {
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<CidadeDTO>> findByNome(@PathVariable String nome) {
 		List<CidadeDTO> list = service.findByNomeContaining(nome);
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/uf/{uf}")
 	public ResponseEntity<List<CidadeDTO>> findByEstado(@PathVariable String uf) {
 		List<CidadeDTO> list = service.findByUf(uf);
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 

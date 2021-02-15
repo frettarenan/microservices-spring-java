@@ -1,6 +1,7 @@
 package br.com.renanfretta.clientes.resources;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -29,13 +30,19 @@ public class ClienteResource {
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<ClienteDTO> list = service.findAll();
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
-		ClienteDTO clienteDTO = service.findById(id);
-		return ResponseEntity.ok(clienteDTO);
+		try {
+			ClienteDTO clienteDTO = service.findById(id);
+			return ResponseEntity.ok(clienteDTO);
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PostMapping
@@ -53,6 +60,8 @@ public class ClienteResource {
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
 		List<ClienteDTO> list = service.findByNomeContaining(nome);
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 
@@ -61,7 +70,7 @@ public class ClienteResource {
 		ClienteDTO clienteDTO = service.deleteById(id);
 		return ResponseEntity.ok(clienteDTO);
 	}
-	
+
 	// FIXME: Implementar Alterar o nome do cliente
 
 }

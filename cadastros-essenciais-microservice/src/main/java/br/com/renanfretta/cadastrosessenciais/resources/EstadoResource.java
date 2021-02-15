@@ -1,6 +1,7 @@
 package br.com.renanfretta.cadastrosessenciais.resources;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,18 +23,26 @@ public class EstadoResource {
 	@GetMapping
 	public ResponseEntity<List<EstadoDTO>> findAll() {
 		List<EstadoDTO> list = service.findAll();
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<EstadoDTO> findById(@PathVariable Long id) {
-		EstadoDTO estadoDTO = service.findById(id);
-		return ResponseEntity.ok(estadoDTO);
+		try {
+			EstadoDTO estadoDTO = service.findById(id);
+			return ResponseEntity.ok(estadoDTO);
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<EstadoDTO>> findByNomeContaining(@PathVariable String nome) {
 		List<EstadoDTO> list = service.findByNomeContaining(nome);
+		if (list.isEmpty())
+			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
 
