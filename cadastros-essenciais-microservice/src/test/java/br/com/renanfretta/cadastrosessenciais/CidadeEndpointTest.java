@@ -150,5 +150,44 @@ public class CidadeEndpointTest {
 		}
 
 	}
+	
+	@Nested
+	@DisplayName("Method: GET Path: /uf/{uf}")
+	class findByUf {
+
+		@Test
+		@DisplayName("Retornando elementos corretamente")
+		public void findByIdEncontrado() throws Exception {
+			
+			List<Cidade> list = new ArrayList<Cidade>();
+			list.add(cidade01);
+
+			BDDMockito.when(repository.findByUf("ac")).thenReturn(list);
+
+			mockMvc.perform(get("/cidades/uf/ac")) //
+					.andExpect(status().isOk()) //
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
+					.andExpect(jsonPath("$.[0].id").value(79)) //
+					.andExpect(jsonPath("$.[0].nome").value("Acrelândia")) //
+					.andExpect(jsonPath("$.[0].estado.id").value(1)) //
+					.andExpect(jsonPath("$.[0].estado.nome").value("Acre")) //
+					.andExpect(jsonPath("$.[0].estado.uf").value("AC")); //
+		}
+
+		@Test
+		@DisplayName("Sem resultados")
+		public void findByIdNaoEncontrado() throws Exception {
+
+			BDDMockito.when(repository.findByNomeContaining("ac")).thenReturn(null);
+
+			mockMvc.perform(get("/cidades/uf/ac")) //
+					.andExpect(status().isNoContent());
+		}
+
+	}
+	
+	// FIXME: salvar
+	
+	// FIXME: atualizar
 
 }
