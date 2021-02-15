@@ -29,7 +29,7 @@ public class CidadeResource {
 	@GetMapping
 	public ResponseEntity<List<CidadeDTO>> findAll() {
 		List<CidadeDTO> list = service.findAll();
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
@@ -59,7 +59,7 @@ public class CidadeResource {
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<CidadeDTO>> findByNome(@PathVariable String nome) {
 		List<CidadeDTO> list = service.findByNomeContaining(nome);
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
@@ -67,7 +67,7 @@ public class CidadeResource {
 	@GetMapping(value = "/uf/{uf}")
 	public ResponseEntity<List<CidadeDTO>> findByEstado(@PathVariable String uf) {
 		List<CidadeDTO> list = service.findByUf(uf);
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}

@@ -30,7 +30,7 @@ public class ClienteResource {
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<ClienteDTO> list = service.findAll();
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
@@ -60,7 +60,7 @@ public class ClienteResource {
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
 		List<ClienteDTO> list = service.findByNomeContaining(nome);
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}

@@ -23,18 +23,18 @@ public class CidadeService {
 
 	public List<CidadeDTO> findAll() {
 		List<Cidade> list = repository.findAll();
-		List<CidadeDTO> listDTO = orikaMapper.getFacade().mapAsList(list, CidadeDTO.class);
+		List<CidadeDTO> listDTO = orikaMapper.mapAsList(list, CidadeDTO.class);
 		return listDTO;
 	}
 
 	public CidadeDTO findById(Long id) {
 		Cidade cidade = repository.findById(id).orElseThrow();
-		CidadeDTO dto = orikaMapper.getFacade().map(cidade, CidadeDTO.class);
+		CidadeDTO dto = orikaMapper.map(cidade, CidadeDTO.class);
 		return dto;
 	}
 
 	public CidadeDTO save(CidadeDTO cidadeDTO) {
-		Cidade cidade = orikaMapper.getFacade().map(cidadeDTO, Cidade.class);
+		Cidade cidade = orikaMapper.map(cidadeDTO, Cidade.class);
 		repository.save(cidade);
 		cidadeDTO = findById(cidade.getId());
 		return cidadeDTO;
@@ -42,13 +42,13 @@ public class CidadeService {
 
 	public List<CidadeDTO> findByNomeContaining(String nome) {
 		List<Cidade> list = repository.findByNomeContaining(nome);
-		List<CidadeDTO> listDTO = orikaMapper.getFacade().mapAsList(list, CidadeDTO.class);
+		List<CidadeDTO> listDTO = orikaMapper.mapAsList(list, CidadeDTO.class);
 		return listDTO;
 	}
 
 	public List<CidadeDTO> findByUf(String uf) {
 		List<Cidade> list = repository.findByUf(uf);
-		List<CidadeDTO> listDTO = orikaMapper.getFacade().mapAsList(list, CidadeDTO.class);
+		List<CidadeDTO> listDTO = orikaMapper.mapAsList(list, CidadeDTO.class);
 		return listDTO;
 	}
 

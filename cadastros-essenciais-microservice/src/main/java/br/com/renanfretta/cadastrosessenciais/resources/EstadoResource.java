@@ -23,7 +23,7 @@ public class EstadoResource {
 	@GetMapping
 	public ResponseEntity<List<EstadoDTO>> findAll() {
 		List<EstadoDTO> list = service.findAll();
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}
@@ -41,7 +41,7 @@ public class EstadoResource {
 	@GetMapping(value = "/nome/{nome}")
 	public ResponseEntity<List<EstadoDTO>> findByNomeContaining(@PathVariable String nome) {
 		List<EstadoDTO> list = service.findByNomeContaining(nome);
-		if (list.isEmpty())
+		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(list);
 	}

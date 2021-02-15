@@ -23,18 +23,18 @@ public class ClienteService {
 
 	public List<ClienteDTO> findAll() {
 		List<Cliente> list = repository.findAll();
-		List<ClienteDTO> listDTO = orikaMapper.getFacade().mapAsList(list, ClienteDTO.class);
+		List<ClienteDTO> listDTO = orikaMapper.mapAsList(list, ClienteDTO.class);
 		return listDTO;
 	}
 
 	public ClienteDTO findById(Long id) {
 		Cliente cliente = repository.findById(id).orElseThrow();
-		ClienteDTO dto = orikaMapper.getFacade().map(cliente, ClienteDTO.class);
+		ClienteDTO dto = orikaMapper.map(cliente, ClienteDTO.class);
 		return dto;
 	}
 
 	public ClienteDTO save(ClienteDTO clienteDTO) {
-		Cliente cliente = orikaMapper.getFacade().map(clienteDTO, Cliente.class);
+		Cliente cliente = orikaMapper.map(clienteDTO, Cliente.class);
 		repository.save(cliente);
 		clienteDTO = findById(cliente.getId());
 		return clienteDTO;
@@ -42,14 +42,14 @@ public class ClienteService {
 
 	public List<ClienteDTO> findByNomeContaining(String nome) {
 		List<Cliente> list = repository.findByNomeContaining(nome);
-		List<ClienteDTO> listDTO = orikaMapper.getFacade().mapAsList(list, ClienteDTO.class);
+		List<ClienteDTO> listDTO = orikaMapper.mapAsList(list, ClienteDTO.class);
 		return listDTO;
 	}
 
 	public ClienteDTO deleteById(Long id) {
 		Cliente cliente = repository.findById(id).orElseThrow();
 		repository.delete(cliente);
-		ClienteDTO dto = orikaMapper.getFacade().map(cliente, ClienteDTO.class);
+		ClienteDTO dto = orikaMapper.map(cliente, ClienteDTO.class);
 		return dto;
 	}
 

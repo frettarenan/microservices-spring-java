@@ -123,9 +123,9 @@ public class EstadoEndpointTest {
 			mockMvc.perform(get("/estados/nome/acre")) //
 					.andExpect(status().isOk()) //
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
-					.andExpect(jsonPath("$.id").value(1)) //
-					.andExpect(jsonPath("$.nome").value("Acre")) //
-					.andExpect(jsonPath("$.uf").value("AC")); //
+					.andExpect(jsonPath("$.[0].id").value(1)) //
+					.andExpect(jsonPath("$.[0].nome").value("Acre")) //
+					.andExpect(jsonPath("$.[0].uf").value("AC")); //
 		}
 
 		@Test
@@ -135,7 +135,7 @@ public class EstadoEndpointTest {
 			BDDMockito.when(repository.findByNomeContaining("acre")).thenReturn(null);
 
 			mockMvc.perform(get("/estados/nome/acre")) //
-					.andExpect(status().isNotFound());
+					.andExpect(status().isNoContent());
 		}
 
 	}

@@ -23,19 +23,19 @@ public class EstadoService {
 
 	public List<EstadoDTO> findAll() {
 		List<Estado> list = repository.findAll();
-		List<EstadoDTO> listDTO = orikaMapper.getFacade().mapAsList(list, EstadoDTO.class);
+		List<EstadoDTO> listDTO = orikaMapper.mapAsList(list, EstadoDTO.class);
 		return listDTO;
 	}
 
 	public EstadoDTO findById(Long id) {
 		Estado estado = repository.findById(id).orElseThrow();
-		EstadoDTO dto = orikaMapper.getFacade().map(estado, EstadoDTO.class);
+		EstadoDTO dto = orikaMapper.map(estado, EstadoDTO.class);
 		return dto;
 	}
 
 	public List<EstadoDTO> findByNomeContaining(String nome) {
 		List<Estado> list = repository.findByNomeContaining(nome);
-		List<EstadoDTO> listDTO = orikaMapper.getFacade().mapAsList(list, EstadoDTO.class);
+		List<EstadoDTO> listDTO = orikaMapper.mapAsList(list, EstadoDTO.class);
 		return listDTO;
 	}
 
