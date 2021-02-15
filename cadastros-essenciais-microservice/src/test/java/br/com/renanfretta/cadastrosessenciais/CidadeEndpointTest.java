@@ -225,6 +225,39 @@ public class CidadeEndpointTest {
 
 	}
 
-	// FIXME: atualizar
+	@Nested
+	@DisplayName("Method: PUT")
+	class atualizar {
+
+		@Test
+		@DisplayName("Atualizado com sucesso")
+		public void atualizarSucesso() throws Exception {
+
+			Cidade cidade = Cidade.builder() //
+					.id(79L) //
+					.nome("Acrelândia edidata") //
+					.estado(Estado.builder() //
+							.id(1L) //
+							.nome("Acre") //
+							.uf("AC") //
+							.build())
+					.build();
+
+			BDDMockito.when(repository.save(cidade)).thenReturn(cidade);
+			BDDMockito.when(repository.findById(79L)).thenReturn(Optional.of(cidade));
+
+			mockMvc.perform(post("/cidades") //
+					.contentType(MediaType.APPLICATION_JSON) //
+					.content(gson.toJson(cidade))) //
+					.andExpect(status().isCreated()) //
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
+					.andExpect(jsonPath("$.id").value(79)) //
+					.andExpect(jsonPath("$.nome").value("Acrelândia edidata")) //
+					.andExpect(jsonPath("$.estado.id").value(1)) //
+					.andExpect(jsonPath("$.estado.nome").value("Acre")) //
+					.andExpect(jsonPath("$.estado.uf").value("AC")); //
+		}
+
+	}
 
 }
