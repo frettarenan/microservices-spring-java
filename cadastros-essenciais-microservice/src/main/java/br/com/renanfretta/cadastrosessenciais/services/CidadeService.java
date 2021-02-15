@@ -35,7 +35,7 @@ public class CidadeService {
 
 	public CidadeDTO save(CidadeDTO cidadeDTO) {
 		Cidade cidade = orikaMapper.map(cidadeDTO, Cidade.class);
-		repository.save(cidade);
+		cidade = repository.save(cidade);
 		cidadeDTO = findById(cidade.getId());
 		return cidadeDTO;
 	}

@@ -2,6 +2,7 @@ package br.com.renanfretta.cadastrosessenciais;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,6 +22,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.google.gson.Gson;
+
 import br.com.renanfretta.cadastrosessenciais.entities.Cidade;
 import br.com.renanfretta.cadastrosessenciais.entities.Estado;
 import br.com.renanfretta.cadastrosessenciais.repositories.CidadeRepository;
@@ -35,6 +38,8 @@ public class CidadeEndpointTest {
 
 	@MockBean
 	private CidadeRepository repository;
+
+	private Gson gson = new Gson();
 
 	private Cidade cidade01 = Cidade.builder() //
 			.id(79L) //
@@ -83,7 +88,7 @@ public class CidadeEndpointTest {
 		}
 
 	}
-	
+
 	@Nested
 	@DisplayName("Method: GET Path: /cidades/{id}")
 	class findById {
@@ -115,15 +120,15 @@ public class CidadeEndpointTest {
 		}
 
 	}
-	
+
 	@Nested
 	@DisplayName("Method: GET Path: /nome/{nome}")
 	class findByNomeContaining {
 
 		@Test
 		@DisplayName("Retornando elementos corretamente")
-		public void findByIdEncontrado() throws Exception {
-			
+		public void findByNomeContainingEncontrado() throws Exception {
+
 			List<Cidade> list = new ArrayList<Cidade>();
 			list.add(cidade01);
 
@@ -141,7 +146,7 @@ public class CidadeEndpointTest {
 
 		@Test
 		@DisplayName("Sem resultados")
-		public void findByIdNaoEncontrado() throws Exception {
+		public void findByNomeContainingNaoEncontrado() throws Exception {
 
 			BDDMockito.when(repository.findByNomeContaining("acrelandia")).thenReturn(null);
 
@@ -150,15 +155,15 @@ public class CidadeEndpointTest {
 		}
 
 	}
-	
+
 	@Nested
 	@DisplayName("Method: GET Path: /uf/{uf}")
 	class findByUf {
 
 		@Test
 		@DisplayName("Retornando elementos corretamente")
-		public void findByIdEncontrado() throws Exception {
-			
+		public void findByUfEncontrado() throws Exception {
+
 			List<Cidade> list = new ArrayList<Cidade>();
 			list.add(cidade01);
 
@@ -176,7 +181,7 @@ public class CidadeEndpointTest {
 
 		@Test
 		@DisplayName("Sem resultados")
-		public void findByIdNaoEncontrado() throws Exception {
+		public void findByUfNaoEncontrado() throws Exception {
 
 			BDDMockito.when(repository.findByNomeContaining("ac")).thenReturn(null);
 
@@ -185,9 +190,41 @@ public class CidadeEndpointTest {
 		}
 
 	}
-	
-	// FIXME: salvar
-	
+
+	@Nested
+	@DisplayName("Method: POST")
+	class salvar {
+
+		@Test
+		@DisplayName("Salvo com sucesso")
+		public void salvarSucesso() throws Exception {
+
+			Cidade cidade = Cidade.builder() //
+					.nome("Acrelândia") //
+					.estado(Estado.builder() //
+							.id(1L) //
+							.nome("Acre") //
+							.uf("AC") //
+							.build())
+					.build();
+
+			BDDMockito.when(repository.save(cidade)).thenReturn(cidade01);
+			BDDMockito.when(repository.findById(79L)).thenReturn(Optional.of(cidade01));
+
+			mockMvc.perform(post("/cidades") //
+					.contentType(MediaType.APPLICATION_JSON) //
+					.content(gson.toJson(cidade))) //
+					.andExpect(status().isCreated()) //
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
+					.andExpect(jsonPath("$.id").value(79)) //
+					.andExpect(jsonPath("$.nome").value("Acrelândia")) //
+					.andExpect(jsonPath("$.estado.id").value(1)) //
+					.andExpect(jsonPath("$.estado.nome").value("Acre")) //
+					.andExpect(jsonPath("$.estado.uf").value("AC")); //
+		}
+
+	}
+
 	// FIXME: atualizar
 
 }
