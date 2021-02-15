@@ -7,12 +7,17 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.renanfretta.commons.dtos.cadastrosessenciais.CidadeDTO;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = -8245145127829755272L;
@@ -30,6 +35,9 @@ public class ClienteDTO implements Serializable {
 	private CidadeDTO cidade;
 
 	public Integer getIdade() {
+		if (getDataNascimento() == null)
+			return null;
+			
 		Calendar now = Calendar.getInstance();
 		Calendar dob = Calendar.getInstance();
 		dob.setTime(getDataNascimento());

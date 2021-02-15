@@ -2,6 +2,7 @@ package br.com.renanfretta.clientes;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,6 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.renanfretta.clientes.entities.Cliente;
 import br.com.renanfretta.clientes.repositories.ClienteRepository;
+import br.com.renanfretta.commons.dtos.clientes.ClienteDTO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -249,7 +251,7 @@ public class ClienteEndpointTest {
 	}
 
 	@Nested
-	@DisplayName("Method: PATCH Path: /clientes")
+	@DisplayName("Method: PATCH Path: /clientes/{id}")
 	class editarInfomacoesPreenchidas {
 
 		@Test
@@ -268,11 +270,11 @@ public class ClienteEndpointTest {
 					.idCidade(4660L) //
 					.build();
 
-			Cliente clienteRequest = Cliente.builder() //
+			ClienteDTO clienteDTORequest = ClienteDTO.builder() //
 					.nome("Renan Fretta editado") //
 					.build();
 
-			BDDMockito.when(repository.save(clienteRequest)).thenReturn(clienteBD);
+			BDDMockito.when(repository.save(clienteBD)).thenReturn(clienteBD);
 			// FIXME: pra mim, este teste não ficou tão eficiente, pois é executado o
 			// "findById" 2x no método PATCH e ficou sem sentido implementar desta forma
 			// Em um cenário de alta disponibilidade o UPDATE seria executado apenas nas
@@ -280,9 +282,9 @@ public class ClienteEndpointTest {
 			// ajudar neste ponto de montagem de queries dinâmicas
 			BDDMockito.when(repository.findById(1L)).thenReturn(Optional.of(clienteBD));
 
-			mockMvc.perform(put("/clientes") //
+			mockMvc.perform(patch("/clientes/1") //
 					.contentType(MediaType.APPLICATION_JSON) //
-					.content(objectMapper.writeValueAsString(clienteRequest))) //
+					.content(objectMapper.writeValueAsString(clienteDTORequest))) //
 					.andExpect(status().isOk()) //
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
 					.andExpect(jsonPath("$.id").value(1)) //
@@ -290,6 +292,20 @@ public class ClienteEndpointTest {
 					.andExpect(jsonPath("$.sexo").value("M")) //
 					.andExpect(jsonPath("$.dataNascimento").value("1986-07-15")) //
 					.andExpect(jsonPath("$.cidade.id").value("4660")); //
+		}
+
+		@Test
+		@DisplayName("Erro: ID inválido")
+		public void editarInfomacoesPreenchidasIdInvalido() throws Exception {
+			
+			ClienteDTO clienteDTORequest = ClienteDTO.builder() //
+					.nome("Renan Fretta editado") //
+					.build();
+
+			mockMvc.perform(patch("/clientes/AAAAA") //
+					.contentType(MediaType.APPLICATION_JSON) //
+					.content(objectMapper.writeValueAsString(clienteDTORequest))) //
+					.andExpect(status().isBadRequest());
 		}
 
 	}
