@@ -12,6 +12,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,6 +41,7 @@ public class Cliente implements Serializable {
 	@Length(min = 1, max = 1)
 	private String sexo;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 

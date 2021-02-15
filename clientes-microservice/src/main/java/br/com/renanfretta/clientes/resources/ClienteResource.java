@@ -46,7 +46,7 @@ public class ClienteResource {
 	}
 	
 	@GetMapping(value = "/nome/{nome}")
-	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
+	public ResponseEntity<List<ClienteDTO>> findByNomeContaining(@PathVariable String nome) {
 		List<ClienteDTO> list = service.findByNomeContaining(nome);
 		if (list == null || list.isEmpty())
 			return ResponseEntity.noContent().build();

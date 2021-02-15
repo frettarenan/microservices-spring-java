@@ -3,6 +3,7 @@ package br.com.renanfretta.cadastrosessenciais;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +23,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.renanfretta.cadastrosessenciais.entities.Cidade;
 import br.com.renanfretta.cadastrosessenciais.entities.Estado;
@@ -39,7 +40,8 @@ public class CidadeEndpointTest {
 	@MockBean
 	private CidadeRepository repository;
 
-	private Gson gson = new Gson();
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	private Cidade cidade01 = Cidade.builder() //
 			.id(79L) //
@@ -221,7 +223,7 @@ public class CidadeEndpointTest {
 
 			mockMvc.perform(post("/cidades") //
 					.contentType(MediaType.APPLICATION_JSON) //
-					.content(gson.toJson(cidade))) //
+					.content(objectMapper.writeValueAsString(cidade))) //
 					.andExpect(status().isCreated()) //
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
 					.andExpect(jsonPath("$.id").value(79)) //
@@ -254,10 +256,10 @@ public class CidadeEndpointTest {
 			BDDMockito.when(repository.save(cidade)).thenReturn(cidade);
 			BDDMockito.when(repository.findById(79L)).thenReturn(Optional.of(cidade));
 
-			mockMvc.perform(post("/cidades") //
+			mockMvc.perform(put("/cidades") //
 					.contentType(MediaType.APPLICATION_JSON) //
-					.content(gson.toJson(cidade))) //
-					.andExpect(status().isCreated()) //
+					.content(objectMapper.writeValueAsString(cidade))) //
+					.andExpect(status().isOk()) //
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
 					.andExpect(jsonPath("$.id").value(79)) //
 					.andExpect(jsonPath("$.nome").value("Acrelândia edidata")) //
