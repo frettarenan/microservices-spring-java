@@ -43,6 +43,14 @@ public class CidadeResource {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@GetMapping(value = "/nome/{nome}")
+	public ResponseEntity<List<CidadeDTO>> findByNomeContaining(@PathVariable String nome) {
+		List<CidadeDTO> list = service.findByNomeContaining(nome);
+		if (list == null || list.isEmpty())
+			return ResponseEntity.noContent().build();
+		return ResponseEntity.ok(list);
+	}
 
 	@PostMapping
 	public ResponseEntity<CidadeDTO> salvar(@Valid @RequestBody CidadeDTO cidadeDTO) {
@@ -54,14 +62,6 @@ public class CidadeResource {
 	public ResponseEntity<CidadeDTO> atualizar(@Valid @RequestBody CidadeDTO cidadeDTO) {
 		cidadeDTO = service.save(cidadeDTO);
 		return ResponseEntity.status(HttpStatus.OK).body(cidadeDTO);
-	}
-
-	@GetMapping(value = "/nome/{nome}")
-	public ResponseEntity<List<CidadeDTO>> findByNome(@PathVariable String nome) {
-		List<CidadeDTO> list = service.findByNomeContaining(nome);
-		if (list == null || list.isEmpty())
-			return ResponseEntity.noContent().build();
-		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/uf/{uf}")
