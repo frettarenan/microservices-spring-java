@@ -35,7 +35,7 @@ public class ClienteService {
 
 	public ClienteDTO save(ClienteDTO clienteDTO) {
 		Cliente cliente = orikaMapper.map(clienteDTO, Cliente.class);
-		repository.save(cliente);
+		cliente = repository.save(cliente);
 		clienteDTO = findById(cliente.getId());
 		return clienteDTO;
 	}

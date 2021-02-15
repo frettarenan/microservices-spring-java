@@ -44,6 +44,14 @@ public class ClienteResource {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@GetMapping(value = "/nome/{nome}")
+	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
+		List<ClienteDTO> list = service.findByNomeContaining(nome);
+		if (list == null || list.isEmpty())
+			return ResponseEntity.noContent().build();
+		return ResponseEntity.ok(list);
+	}
 
 	@PostMapping
 	public ResponseEntity<ClienteDTO> salvar(@Valid @RequestBody ClienteDTO clienteDTO) {
@@ -57,14 +65,6 @@ public class ClienteResource {
 		return ResponseEntity.status(HttpStatus.OK).body(clienteDTO);
 	}
 
-	@GetMapping(value = "/nome/{nome}")
-	public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome) {
-		List<ClienteDTO> list = service.findByNomeContaining(nome);
-		if (list == null || list.isEmpty())
-			return ResponseEntity.noContent().build();
-		return ResponseEntity.ok(list);
-	}
-
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ClienteDTO> deleteById(@PathVariable Long id) {
 		ClienteDTO clienteDTO = service.deleteById(id);
@@ -72,5 +72,6 @@ public class ClienteResource {
 	}
 
 	// FIXME: Implementar Alterar o nome do cliente
+	// @PatchMapping
 
 }
