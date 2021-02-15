@@ -41,7 +41,7 @@ public class ClienteEndpointTest {
 
 	@MockBean
 	private ClienteRepository repository;
-	
+
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -139,7 +139,7 @@ public class ClienteEndpointTest {
 		}
 
 	}
-	
+
 	@Nested
 	@DisplayName("Method: GET Path: /nome/{nome}")
 	class findByNomeContaining {
@@ -174,19 +174,19 @@ public class ClienteEndpointTest {
 		}
 
 	}
-	
+
 	@Nested
-	@DisplayName("Method: POST")
+	@DisplayName("Method: POST Path: /clientes")
 	class salvar {
 
 		@Test
 		@DisplayName("Salvo com sucesso")
 		public void salvarSucesso() throws Exception {
-			
+
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(1986, 7 - 1, 15);
 			Date dataNascimento = calendar.getTime();
-			
+
 			Cliente cliente = Cliente.builder() //
 					.nome("Renan Fretta") //
 					.sexo("M") //
@@ -212,17 +212,17 @@ public class ClienteEndpointTest {
 	}
 
 	@Nested
-	@DisplayName("Method: PUT")
+	@DisplayName("Method: PUT Path: /clientes")
 	class atualizar {
 
 		@Test
 		@DisplayName("Atualizado com sucesso")
 		public void atualizarSucesso() throws Exception {
-			
+
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(1986, 7 - 1, 15);
 			Date dataNascimento = calendar.getTime();
-			
+
 			Cliente cliente = Cliente.builder() //
 					.id(1L) //
 					.nome("Renan Fretta editado") //
@@ -244,6 +244,46 @@ public class ClienteEndpointTest {
 					.andExpect(jsonPath("$.sexo").value("M")) //
 					.andExpect(jsonPath("$.dataNascimento").value("1986-07-15")) //
 					.andExpect(jsonPath("$.cidade.id").value("4660")); //
+		}
+
+	}
+
+	@Nested
+	@DisplayName("Method: DELETE Path: /clientes")
+	class deleteById {
+
+		@Test
+		@DisplayName("Deletado com sucesso")
+		public void deleteByIdSucesso() throws Exception {
+
+			BDDMockito.when(repository.findById(1L)).thenReturn(Optional.of(cliente01));
+
+			mockMvc.perform(get("/clientes/1")) //
+					.andExpect(status().isOk()) //
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
+					.andExpect(jsonPath("$.id").value(1)) //
+					.andExpect(jsonPath("$.nome").value("Renan Fretta")) //
+					.andExpect(jsonPath("$.sexo").value("M")) //
+					.andExpect(jsonPath("$.dataNascimento").value("1986-07-15")) //
+					.andExpect(jsonPath("$.cidade.id").value("4660")); //
+		}
+
+		@Test
+		@DisplayName("Sem resultados")
+		public void deleteByIdNaoEncontrado() throws Exception {
+
+			BDDMockito.when(repository.findById(9999L)).thenReturn(null);
+
+			mockMvc.perform(get("/clientes/1")) //
+					.andExpect(status().isNotFound());
+		}
+
+		@Test
+		@DisplayName("Erro: ID inválido")
+		public void deleteByIdErro() throws Exception {
+
+			mockMvc.perform(get("/clientes/AAAAA")) //
+					.andExpect(status().isBadRequest());
 		}
 
 	}

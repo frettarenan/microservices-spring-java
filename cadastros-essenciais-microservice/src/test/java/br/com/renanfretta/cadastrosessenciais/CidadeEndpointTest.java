@@ -202,7 +202,7 @@ public class CidadeEndpointTest {
 	}
 
 	@Nested
-	@DisplayName("Method: POST")
+	@DisplayName("Method: POST Path: /cidades")
 	class salvar {
 
 		@Test
@@ -236,7 +236,7 @@ public class CidadeEndpointTest {
 	}
 
 	@Nested
-	@DisplayName("Method: PUT")
+	@DisplayName("Method: PUT Path: /cidades")
 	class atualizar {
 
 		@Test
