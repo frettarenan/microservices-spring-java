@@ -249,6 +249,52 @@ public class ClienteEndpointTest {
 	}
 
 	@Nested
+	@DisplayName("Method: PATCH Path: /clientes")
+	class editarInfomacoesPreenchidas {
+
+		@Test
+		@DisplayName("Nome atualizado com sucesso")
+		public void editarInfomacoesPreenchidasNomeAtualizadoComSucesso() throws Exception {
+
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(1986, 7 - 1, 15);
+			Date dataNascimento = calendar.getTime();
+
+			Cliente clienteBD = Cliente.builder() //
+					.id(1L) //
+					.nome("Renan Fretta editado") //
+					.sexo("M") //
+					.dataNascimento(dataNascimento) //
+					.idCidade(4660L) //
+					.build();
+
+			Cliente clienteRequest = Cliente.builder() //
+					.nome("Renan Fretta editado") //
+					.build();
+
+			BDDMockito.when(repository.save(clienteRequest)).thenReturn(clienteBD);
+			// FIXME: pra mim, este teste não ficou tão eficiente, pois é executado o
+			// "findById" 2x no método PATCH e ficou sem sentido implementar desta forma
+			// Em um cenário de alta disponibilidade o UPDATE seria executado apenas nas
+			// colunas que foram alteradas, acredito que a utilização de queryDSL pode
+			// ajudar neste ponto de montagem de queries dinâmicas
+			BDDMockito.when(repository.findById(1L)).thenReturn(Optional.of(clienteBD));
+
+			mockMvc.perform(put("/clientes") //
+					.contentType(MediaType.APPLICATION_JSON) //
+					.content(objectMapper.writeValueAsString(clienteRequest))) //
+					.andExpect(status().isOk()) //
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //
+					.andExpect(jsonPath("$.id").value(1)) //
+					.andExpect(jsonPath("$.nome").value("Renan Fretta editado")) //
+					.andExpect(jsonPath("$.sexo").value("M")) //
+					.andExpect(jsonPath("$.dataNascimento").value("1986-07-15")) //
+					.andExpect(jsonPath("$.cidade.id").value("4660")); //
+		}
+
+	}
+
+	@Nested
 	@DisplayName("Method: DELETE Path: /clientes")
 	class deleteById {
 

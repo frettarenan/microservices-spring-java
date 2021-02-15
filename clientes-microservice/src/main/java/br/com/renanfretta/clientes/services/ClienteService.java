@@ -45,6 +45,27 @@ public class ClienteService {
 		List<ClienteDTO> listDTO = orikaMapper.mapAsList(list, ClienteDTO.class);
 		return listDTO;
 	}
+	
+	public ClienteDTO editarInfomacoesPreenchidas(Long id, ClienteDTO clienteDTO) {
+		Cliente cliente = repository.findById(id).orElseThrow();
+		
+		if (clienteDTO.getNome() != null)
+			cliente.setNome(clienteDTO.getNome());
+		
+		if (clienteDTO.getSexo() != null)
+			cliente.setSexo(clienteDTO.getSexo());
+		
+		if (clienteDTO.getDataNascimento() != null)
+			cliente.setDataNascimento(clienteDTO.getDataNascimento());
+		
+		if (clienteDTO.getCidade() != null && clienteDTO.getCidade().getId() != null)
+			cliente.setIdCidade(clienteDTO.getCidade().getId());
+		
+		cliente = repository.save(cliente);
+		
+		clienteDTO = findById(cliente.getId());
+		return clienteDTO;
+	}
 
 	public ClienteDTO deleteById(Long id) {
 		Cliente cliente = repository.findById(id).orElseThrow();

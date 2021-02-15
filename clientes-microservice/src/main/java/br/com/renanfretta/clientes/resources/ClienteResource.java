@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -64,14 +65,17 @@ public class ClienteResource {
 		clienteDTO = service.save(clienteDTO);
 		return ResponseEntity.status(HttpStatus.OK).body(clienteDTO);
 	}
+	
+	@PatchMapping(value = "/{id}")
+	public ResponseEntity<ClienteDTO> editarInfomacoesPreenchidas(@PathVariable Long id, @Valid @RequestBody ClienteDTO clienteDTO) {
+		clienteDTO = service.editarInfomacoesPreenchidas(id, clienteDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(clienteDTO);
+	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ClienteDTO> deleteById(@PathVariable Long id) {
 		ClienteDTO clienteDTO = service.deleteById(id);
 		return ResponseEntity.ok(clienteDTO);
 	}
-
-	// FIXME: Implementar Alterar o nome do cliente
-	// @PatchMapping
 
 }
