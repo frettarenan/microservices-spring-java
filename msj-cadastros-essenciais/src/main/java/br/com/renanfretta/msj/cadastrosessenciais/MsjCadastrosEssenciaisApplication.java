@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class CadastrosEssenciaisMicroserviceApplication {
+public class MsjCadastrosEssenciaisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CadastrosEssenciaisMicroserviceApplication.class, args);
+		SpringApplication.run(MsjCadastrosEssenciaisApplication.class, args);
 	}
 
 }
