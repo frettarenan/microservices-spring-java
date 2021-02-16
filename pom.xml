@@ -17,8 +17,6 @@
 	<artifactId>msj-microservices-spring-java</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	
-	<name>msj-microservices-spring-java</name>
-
 	<modules>
 		<module>msj-cadastros-essenciais-microservice</module>
 		<module>msj-clientes-microservice</module>
