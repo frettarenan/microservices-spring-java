@@ -22,6 +22,7 @@
 		<module>msj-clientes</module>
 		<module>msj-commons</module>
 		<module>msj-eureka-server</module>
+		<module>msj-api-gateway</module>
 	</modules>
 
 	<properties>
