@@ -8,17 +8,17 @@
 
 	<parent>
 		<groupId>com.br.renanfretta</groupId>
-		<artifactId>microservices-spring-java</artifactId>
+		<artifactId>msj-microservices-spring-java</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>br.com.renanfretta.microservices-spring-java</groupId>
-	<artifactId>cadastros-essenciais-microservice</artifactId>
+	<artifactId>msj-clientes-microservice</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>br.com.renanfretta.microservices-spring-java</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>msj-commons</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,7 +28,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -51,6 +50,10 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ma.glasnost.orika</groupId>

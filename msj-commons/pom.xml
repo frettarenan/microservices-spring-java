@@ -8,36 +8,27 @@
 
 	<parent>
 		<groupId>com.br.renanfretta</groupId>
-		<artifactId>microservices-spring-java</artifactId>
+		<artifactId>msj-microservices-spring-java</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>br.com.renanfretta.microservices-spring-java</groupId>
-	<artifactId>eureka-server</artifactId>
+	<artifactId>msj-commons</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
