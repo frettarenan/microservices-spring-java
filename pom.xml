@@ -21,10 +21,12 @@
 		<module>cadastros-essenciais-microservice</module>
 		<module>clientes-microservice</module>
 		<module>commons</module>
+		<module>eureka-server</module>
 	</modules>
 
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2020.0.1</spring-cloud.version>
 		<org.projectlombok.lombok.version>1.18.16</org.projectlombok.lombok.version>
 		<ma.glasnost.orika.orika-core.version>1.5.4</ma.glasnost.orika.orika-core.version>
 	</properties>
@@ -40,6 +42,20 @@
 				<groupId>ma.glasnost.orika</groupId>
 				<artifactId>orika-core</artifactId>
 				<version>${ma.glasnost.orika.orika-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.SR8</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
